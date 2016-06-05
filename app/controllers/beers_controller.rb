@@ -37,13 +37,37 @@ class BeersController < ApplicationController
     end
   end
 
+  get '/beers/:id/edit' do #Load edit page for specific beer
+    if session[:user_id]
+      @beer = Beer.find_by_id(params[:id])
+      if @beer.user_id == session[:user_id]
+       erb :'beers/edit_beer'
+      else
+        redirect to '/beers'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/beers/:id' do #Load edit page, if beer does not exist Create/Save it
+    if params[:content] == ""
+      redirect to "/beers/#{params[:id]}/edit"
+    else
+      @beer = Beer.find_by_id(params[:id])
+      @beer.score = params[:score]
+      @beer.save
+      redirect to "/beers/#{@beer.id}"
+    end
+  end
 
   post '/beers/:id/delete' do #Delete specific beer by id
     @beer = Beer.find_by_id(params[:id])
+    @brewery = @beer.brewery
     if session[:user_id]
       @beer = Beer.find_by_id(params[:id])
       @beer.delete
-      redirect to '/beers'
+      redirect to "/breweries/#{@brewery.id}"
     else
       redirect to '/login'
     end
