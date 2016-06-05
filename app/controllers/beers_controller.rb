@@ -23,7 +23,7 @@ class BeersController < ApplicationController
     else
       @user = User.find_by_id(session[:user_id])
       @brewery = Brewery.find_or_create_by(:name => params[:brewery])
-      @beer = Beer.create(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
+      @beer = Beer.find_or_create_by(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
       redirect to "/beers"
     end
   end

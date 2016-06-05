@@ -1,9 +1,4 @@
 class UsersController < ApplicationController
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
-  end
-
   get '/signup' do #If not logged in go to user creation form
     if !session[:user_id]
       erb :'users/create_user'
