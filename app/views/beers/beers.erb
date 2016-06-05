@@ -2,9 +2,10 @@
 
 <% @beers.each do |beer| %>
   <div>
-    <%= beer.name %>
-    <%= beer.style %>
-    <%= beer.brewery %>
-    <%= beer.score %>
+    Name: <%= beer.name %> </br>
+    Style: <%= beer.style %> </br>
+    Brewery: <a href="/breweries/<%=beer.brewery.id%>"> <%= beer.brewery.name %></a> </br>
+    Score: <%= beer.score %> </br>
+    </br>
   </div>
 <% end %>

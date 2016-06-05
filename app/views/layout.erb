@@ -9,6 +9,8 @@
     <nav>
       <% if logged_in? %>
         <p>Welcome, <%=current_user.username %></p>
+        <a href="/beers"> Your Beers</a>
+        </br>
         <a href="/beers/new"> Add Beer </a>
         </br>
         <a href="/logout"> Log Out </a>

@@ -7,4 +7,5 @@ end
 use Rack::MethodOverride
 use BeersController
 use UsersController
+use BreweriesController
 run ApplicationController
