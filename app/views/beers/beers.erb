@@ -1,0 +1,10 @@
+<p> Here's all your Beers </p>
+
+<% @beers.each do |beer| %>
+  <div>
+    <%= beer.name %>
+    <%= beer.style %>
+    <%= beer.brewery %>
+    <%= beer.score %>
+  </div>
+<% end %>
