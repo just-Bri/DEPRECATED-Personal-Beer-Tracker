@@ -15,12 +15,14 @@ ActiveRecord::Schema.define(version: 20160605175518) do
 
   create_table "beers", force: :cascade do |t|
     t.integer "brewery_id"
+    t.integer "user_id"
     t.string  "name"
     t.string  "style"
     t.integer "score"
   end
 
   add_index "beers", ["brewery_id"], name: "index_beers_on_brewery_id"
+  add_index "beers", ["user_id"], name: "index_beers_on_user_id"
 
   create_table "breweries", force: :cascade do |t|
     t.string "name"

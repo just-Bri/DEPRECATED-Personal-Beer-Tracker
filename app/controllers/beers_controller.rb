@@ -1,7 +1,8 @@
 class BeersController < ApplicationController
   get '/beers' do #Display user's beers, go to login if no session
     if session[:user_id]
-      @beers = Beer.all
+      @user = User.find(session[:user_id])
+      @beers = @user.beers
       erb :'beers/beers'
     else
       redirect to '/login'
@@ -20,9 +21,9 @@ class BeersController < ApplicationController
     if params[:content] == ""
       redirect to "/beers/new"
     else
-      user = User.find_by_id(session[:user_id])
+      @user = User.find_by_id(session[:user_id])
       @brewery = Brewery.find_or_create_by(:name => params[:brewery])
-      @beer = Beer.create(:name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
+      @beer = Beer.create(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
       redirect to "/beers"
     end
   end

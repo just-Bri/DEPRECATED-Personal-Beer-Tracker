@@ -1,7 +1,7 @@
 <p>
 Name: <%= @beer.name %></br>
 Style: <%= @beer.style %></br>
-Brewery: <%= @beer.brewery.name %></br>
+Brewery: <a href="/breweries/<%=@beer.brewery.id%>"><%= @beer.brewery.name %></a></br>
 Score: <%= @beer.score %></br>
 <form method="post" action="/beers/<%=@beer.id%>/delete">
   <input type="submit" value="Delete beer">
