@@ -9,21 +9,17 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "golfclubsaregreat"
   end
 
-  def view_exists?(view)
-    File.exists?(Dir.pwd + "/views/#{view}.erb")
-  end
-
   get '/' do
     erb :index #Home page
   end
 
-  # get '/*' do
-  #   @domain = request.env["HTTP_HOST"].sub(/^(?:www)\./, '')
-  #
-  #   view = @domain
-  #   view = 'not_sure' unless view_exists?(@domain)
-  #   erb view.to_sym
-  # end
+  def view_exists?(view)
+    File.exists?(Dir.pwd + "/views/#{view}.erb")
+  end
+
+  get '/*' do
+    pass unless view_exists?(params['*'])
+  end
 
   helpers do
     def redirect_if_not_logged_in
