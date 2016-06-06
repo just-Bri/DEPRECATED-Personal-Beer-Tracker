@@ -17,6 +17,14 @@ class ApplicationController < Sinatra::Base
     erb :index #Home page
   end
 
+  # get '/*' do
+  #   @domain = request.env["HTTP_HOST"].sub(/^(?:www)\./, '')
+  #
+  #   view = @domain
+  #   view = 'not_sure' unless view_exists?(@domain)
+  #   erb view.to_sym
+  # end
+
   helpers do
     def redirect_if_not_logged_in
       if !logged_in?

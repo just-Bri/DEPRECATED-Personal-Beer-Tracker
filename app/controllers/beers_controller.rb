@@ -73,12 +73,4 @@ class BeersController < ApplicationController
       redirect to '/login'
     end
   end
-
-  get '/*' do
-    @domain = request.env["HTTP_HOST"].sub(/^(?:www)\./, '')
-
-    view = @domain
-    view = 'not_sure' unless view_exists?(@domain)
-    erb view.to_sym
-  end
 end

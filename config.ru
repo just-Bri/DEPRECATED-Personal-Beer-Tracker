@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use BreweriesController
 use BeersController
 use UsersController
-use BreweriesController
 run ApplicationController
