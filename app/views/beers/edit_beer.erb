@@ -1,5 +1,5 @@
 Change score:
-<form method="post" action="/beers/<%=@beer.id%>">
+<form method="patch" action="/beers/<%=@beer.id%>">
   <input type="integer" name="score" value="<%= @beer.score %>">
   <input type="submit" value="submit">
 </form>

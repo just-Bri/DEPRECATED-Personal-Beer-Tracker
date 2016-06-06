@@ -1,23 +1,18 @@
 class BeersController < ApplicationController
   get '/beers' do #Display user's beers, go to login if no session
-    if session[:user_id]
-      @user = User.find(session[:user_id])
-      @beers = @user.beers
-      erb :'beers/beers'
-    else
-      redirect to '/login'
-    end
+    redirect_if_not_logged_in
+    @user = User.find(session[:user_id])
+    @beers = @user.beers
+    erb :'beers/beers'
   end
 
   get '/beers/new' do #New beer form
-    if session[:user_id]
-      erb :'beers/create_beer'
-    else
-      redirect to '/login'
-    end
+    redirect_if_not_logged_in
+    erb :'beers/create_beer'
   end
 
   post '/beers' do #Create and save new beer and redir to show
+    redirect_if_not_logged_in
     if params[:content] == ""
       redirect to "/beers/new"
     else
@@ -29,15 +24,19 @@ class BeersController < ApplicationController
   end
 
   get '/beers/:id' do #Load specific beer
+    redirect_if_not_logged_in
     if session[:user_id]
-      @beer = Beer.find_by_id(params[:id])
-      erb :'beers/show_beer'
-    else
-      redirect to '/login'
+      if !Beer.exists?(params[:id])
+        erb :not_the_right_beer_id
+      else
+        @beer = Beer.find_by_id(params[:id])
+        erb :'beers/show_beer'
+      end
     end
   end
 
   get '/beers/:id/edit' do #Load edit page for specific beer
+    redirect_if_not_logged_in
     if session[:user_id]
       @beer = Beer.find_by_id(params[:id])
       if @beer.user_id == session[:user_id]
@@ -51,6 +50,7 @@ class BeersController < ApplicationController
   end
 
   post '/beers/:id' do #Load edit page, if beer does not exist Create/Save it
+    redirect_if_not_logged_in
     if params[:content] == ""
       redirect to "/beers/#{params[:id]}/edit"
     else
@@ -62,6 +62,7 @@ class BeersController < ApplicationController
   end
 
   post '/beers/:id/delete' do #Delete specific beer by id
+    redirect_if_not_logged_in
     @beer = Beer.find_by_id(params[:id])
     @brewery = @beer.brewery
     if session[:user_id]
