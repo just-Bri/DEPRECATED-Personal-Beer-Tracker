@@ -14,7 +14,7 @@ class BeersController < ApplicationController
   post '/beers' do #Create and save new beer and redir to show
     redirect_if_not_logged_in
     if params[:content] == ""
-      redirect to "/beers/new"
+      redirect to "/beers/new?error=invalid input"
     else
       @user = User.find_by_id(session[:user_id])
       @brewery = Brewery.find_or_create_by(:name => params[:brewery])
@@ -27,7 +27,7 @@ class BeersController < ApplicationController
     redirect_if_not_logged_in
     if session[:user_id]
       if !Beer.exists?(params[:id])
-        erb :not_the_right_beer_id
+        erb :not_sure
       else
         @beer = Beer.find_by_id(params[:id])
         erb :'beers/show_beer'
@@ -72,5 +72,13 @@ class BeersController < ApplicationController
     else
       redirect to '/login'
     end
+  end
+
+  get '/*' do
+    @domain = request.env["HTTP_HOST"].sub(/^(?:www)\./, '')
+
+    view = @domain
+    view = 'not_sure' unless view_exists?(@domain)
+    erb view.to_sym
   end
 end
