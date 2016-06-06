@@ -22,7 +22,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/*' do
-    pass unless view_exists?(params['*'])
+    if view_exists?(params['*'])
+      pass
+    else
+      erb :not_sure
+    end
   end
 
   helpers do
