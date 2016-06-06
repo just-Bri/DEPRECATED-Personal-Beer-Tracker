@@ -42,7 +42,7 @@ class BeersController < ApplicationController
       if @beer.user_id == session[:user_id]
        erb :'beers/edit_beer'
       else
-        redirect to '/beers'
+        redirect to './not_yours'
       end
     else
       redirect to '/login'
@@ -63,12 +63,14 @@ class BeersController < ApplicationController
 
   post '/beers/:id/delete' do #Delete specific beer by id
     redirect_if_not_logged_in
-    @beer = Beer.find_by_id(params[:id])
-    @brewery = @beer.brewery
     if session[:user_id]
       @beer = Beer.find_by_id(params[:id])
-      @beer.delete
-      redirect to "/breweries/#{@brewery.id}"
+      if @beer.user_id == session[:user_id]
+        @beer.delete
+        redirect to '/beers'
+      else
+        redirect to './not_yours'
+      end
     else
       redirect to '/login'
     end

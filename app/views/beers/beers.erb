@@ -1,11 +1,15 @@
-<p> Here's all your Beers </p>
-
-<% @beers.each do |beer| %>
-  <div>
-    Name: <a href="/beers/<%=beer.id%>"><%= beer.name %></a></br>
-    Style: <%= beer.style %> </br>
-    Brewery: <a href="/breweries/<%=beer.brewery.id%>"> <%= beer.brewery.name %></a></br>
-    Score: <%= beer.score %> </br>
-    </br>
-  </div>
+<% if @beers.count == 0 %>
+  <p>Oh no, there's no beers here!</p>
+  <p>You need to <a href="/beers/new">add a beer</a>.</p>
+  <%else%>
+  <p> Here's all your Beers </p>
+    <% @beers.each do |beer| %>
+      <div>
+        Name: <a href="/beers/<%=beer.id%>"><%= beer.name %></a></br>
+        Style: <%= beer.style %> </br>
+        Brewery: <a href="/breweries/<%=beer.brewery.id%>"> <%= beer.brewery.name %></a></br>
+        Score: <%= beer.score %> </br>
+        </br>
+      </div>
+    <% end %>
 <% end %>

@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
     erb :index #Home page
   end
 
+  get '/not_yours' do
+    erb :not_yours
+  end
+
   def view_exists?(view)
     File.exists?(Dir.pwd + "/views/#{view}.erb")
   end
