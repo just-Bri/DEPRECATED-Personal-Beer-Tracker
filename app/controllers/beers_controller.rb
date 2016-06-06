@@ -30,7 +30,11 @@ class BeersController < ApplicationController
         erb :not_sure
       else
         @beer = Beer.find_by_id(params[:id])
-        erb :'beers/show_beer'
+        if @beer.user_id == session[:user_id]
+          erb :'beers/show_beer'
+        else
+          redirect to './not_yours'
+        end
       end
     end
   end
@@ -51,13 +55,13 @@ class BeersController < ApplicationController
 
   post '/beers/:id' do #Load edit page, if beer does not exist Create/Save it
     redirect_if_not_logged_in
-    if params[:content] == ""
-      redirect to "/beers/#{params[:id]}/edit"
+    @beer = Beer.find_by_id(params[:id])
+    if params[:new_score].empty?
+      redirect to "/beers/#{@beer.id}/edit"
     else
-      @beer = Beer.find_by_id(params[:id])
-      @beer.score = params[:score]
+      @beer.score = params[:new_score]
       @beer.save
-      redirect to "/beers/#{@beer.id}"
+      redirect "/beers/#{@beer.id}"
     end
   end
 
