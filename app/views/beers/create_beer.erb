@@ -1,3 +1,10 @@
+<% if @error == true %>
+  <p>Uh oh! Looks like you left something blank!</p>
+<% end %>
+<% if @score_error == true %>
+  <p>Score must be a number!</p>
+<% end %>
+
 <h2>New Beer</h2>
 <form action="/beers" method="POST">
   <p>Name: <input type="text" name="name"></p>
