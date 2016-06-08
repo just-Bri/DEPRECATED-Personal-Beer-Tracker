@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  has_many  :beers 
+  validates :username, uniqueness: true, presence: true
+  
+  has_many  :beers
 
   has_secure_password
 

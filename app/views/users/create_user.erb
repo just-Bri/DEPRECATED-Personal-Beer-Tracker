@@ -1,5 +1,8 @@
+<% if @error == true %>
+  <p>Uh oh! Looks like you left something blank!</p>
+<% end %>
 <form action="/signup" method="POST">
-  <p>Username (This IS case sensitive!): <input type="text" name="username"></p>
+  <p>Username (Case sensitive!): <input type="text" name="username"></p>
   <p>Email: <input type="text" name="email"></p>
   <p>Password: <input type="text" name="password"></p>
   <input class="btn btn-primary" type="submit">

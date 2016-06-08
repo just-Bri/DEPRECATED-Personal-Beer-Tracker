@@ -11,7 +11,7 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
-gem 'sinatra-advanced-routes', :require => 'sinatra/advanced_routes'
+gem 'sinatra-flash'
 
 group :test do
   gem 'rspec'
