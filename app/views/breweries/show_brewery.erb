@@ -1,7 +1,7 @@
 <p>
 Brewery: <%= @brewery.name %></br>
 
-<% @brewery.beers.each do |beer| %>
+<% @beers.each do |beer| %>
   <div>
     Name: <a href="/beers/<%=beer.id%>"><%= beer.name %></a></br>
     Style: <%= beer.style %> </br>
