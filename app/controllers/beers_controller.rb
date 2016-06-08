@@ -1,5 +1,6 @@
 class BeersController < ApplicationController
   get '/beers' do #Display user's beers, go to login if no session
+    @id = session[:user_id]
     redirect_if_not_logged_in
     @user = User.find(session[:user_id])
     @beers = @user.beers

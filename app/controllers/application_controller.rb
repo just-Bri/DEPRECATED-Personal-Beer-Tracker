@@ -1,12 +1,15 @@
 require './config/environment'
-
+require 'sinatra'
+require 'sinatra/advanced_routes'
 
 class ApplicationController < Sinatra::Base
+  register Sinatra::AdvancedRoutes
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "golfclubsaregreat"
+    set :session_secret, "beerssecret"
   end
 
   get '/' do
@@ -17,12 +20,11 @@ class ApplicationController < Sinatra::Base
     erb :not_yours
   end
 
-  def view_exists?(view)
-    File.exists?(Dir.pwd + "/views/#{view}.erb")
-  end
-
   get '/*' do
-    if view_exists?(params['*'])
+    binding.pry
+    @routes_all = []
+    self::Application.each_route.path_info {|r| @routes_all < r}
+    if @routes_all.include?(request.path_info)
       pass
     else
       erb :not_sure
