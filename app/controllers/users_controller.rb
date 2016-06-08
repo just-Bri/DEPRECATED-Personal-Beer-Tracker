@@ -14,8 +14,8 @@ class UsersController < ApplicationController
     if @user.valid?
       redirect to '/beers'
     else
-      #Return to /signup and display error, not sure how to handle errors
-      redirect to '/signup'
+      #Return to /create_user and display error(s)
+      erb :'users/create_user'
     end
   end
 
