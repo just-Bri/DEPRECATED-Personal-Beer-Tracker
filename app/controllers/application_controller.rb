@@ -1,9 +1,7 @@
 require './config/environment'
 require 'sinatra'
-require 'sinatra/advanced_routes'
 
 class ApplicationController < Sinatra::Base
-  register Sinatra::AdvancedRoutes
 
   configure do
     set :public_folder, 'public'

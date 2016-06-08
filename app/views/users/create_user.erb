@@ -1,5 +1,14 @@
+<% if @username_error == true %>
+  <p>Try again, you left the username blank!</p>
+<% end %>
+<% if @email_error == true %>
+  <p>Try again, you left the email blank!</p>
+<% end %>
+<% if @password_error == true %>
+  <p>Try again, you left the password blank!</p>
+<% end %>
 <form action="/signup" method="POST">
-  <p>Username (This IS case sensitive!): <input type="text" name="username"></p>
+  <p>Username (Case sensitive!): <input type="text" name="username"></p>
   <p>Email: <input type="text" name="email"></p>
   <p>Password: <input type="text" name="password"></p>
   <input class="btn btn-primary" type="submit">
