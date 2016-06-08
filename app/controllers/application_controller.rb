@@ -21,40 +21,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/*' do
-    ApplicationController::all_routes
-    if @@endpoints.include?(request.path_info)
+    @request_url = request.path_info
+    @beer_routes = ["/beers", "/beers/new", "/beers/#{request.path_info.split('/').last}", "/beers/#{request.path_info.split('/')[2]}/edit"]
+    @user_routes = ["/signup", "/login", "/logout"]
+    @brewery_routes = ["/breweries/#{request.path_info.split('/').last}"]
+    @all_routes = @beer_routes + @user_routes + @brewery_routes
+    if @all_routes.include?(@request_url)
       pass
     else
       erb :not_sure
-    end
-  end
-
-  def self.all_routes
-    @@endpoints= {}
-    if Sinatra::Application.descendants.any?
-      #Classic application structure
-      applications = Sinatra::Application.descendants
-      applications.each do |app|
-        @@endpoints[app.to_s.downcase.to_sym] = app.routes
-      end
-    elsif Sinatra::Base.descendants.any?
-      #Modular application structure
-      applications = Sinatra::Base.descendants
-      applications.each do |app|
-        @@endpoints[app.to_s.downcase.to_sym] = app.routes
-      end
-    else
-      abort("Cannot find any defined routes.....")
-    end
-
-    @@endpoints.each do |app_name,routes|
-      puts "Application: #{app_name}\n"
-      routes.each do |verb,handlers|
-        puts "\n#{verb}:\n"
-        handlers.each do |handler|
-          puts handler[0].source.to_s
-        end
-      end
     end
   end
 
