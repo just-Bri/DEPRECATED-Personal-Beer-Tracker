@@ -8,15 +8,15 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do #Create new user unless input is blank
-    # if params[:username] == "" || params[:email] == "" || params[:password] == ""
-    #   @error = true
-    #   erb :'users/create_user'
-    # else
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
-      session[:user_id] = @user.id #Set session for future reference
+    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+    @user.save
+    session[:user_id] = @user.id #Set session for future reference
+    if @user.valid?
       redirect to '/beers'
-    # end
+    else
+      #Return to /signup and display error, not sure how to handle errors
+      redirect to '/signup'
+    end
   end
 
   get '/login' do #Go to user's beers, unless they are not logged in

@@ -1,6 +1,12 @@
-<% if @error == true %>
-  <p>Uh oh! Looks like you left something blank!</p>
+<% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
 <% end %>
+
+<br>
+
 <form action="/signup" method="POST">
   <p>Username (Case sensitive!): <input type="text" name="username"></p>
   <p>Email: <input type="text" name="email"></p>

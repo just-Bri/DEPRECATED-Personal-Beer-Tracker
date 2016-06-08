@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  validates :username, uniqueness: true, presence: true
-  
+  validates :username, uniqueness: true, :presence => { :message => "Username cannot be blank" }
+  validates :email, uniqueness: true, :presence => { :message => "Email cannot be blank" }
+  validates :password, :presence => { :message => "Password cannot be blank" }
+
   has_many  :beers
 
   has_secure_password

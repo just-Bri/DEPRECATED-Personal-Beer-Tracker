@@ -14,18 +14,10 @@ class BeersController < ApplicationController
 
   post '/beers' do #Create and save new beer and redir to show
     redirect_if_not_logged_in
-    if params[:name] == "" || params[:style] == "" || params[:brewery] == "" || params[:score] == ""
-      @error = true
-      erb :'/beers/create_beer'
-    elsif !params[:score].is_a? Numeric
-      @score_error = true
-      erb :'/beers/create_beer'
-    else
-      @user = User.find_by_id(session[:user_id])
-      @brewery = Brewery.find_or_create_by(:name => params[:brewery])
-      @beer = Beer.find_or_create_by(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
-      redirect to "/beers"
-    end
+    @user = User.find_by_id(session[:user_id])
+    @brewery = Brewery.find_or_create_by(:name => params[:brewery])
+    @beer = Beer.find_or_create_by(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
+    redirect to "/beers"
   end
 
   get '/beers/:id' do #Load specific beer
