@@ -1,9 +1,11 @@
-<% if @error == true %>
-  <p>Uh oh! Looks like you left something blank!</p>
+<% if @beer && @beer.errors.any? %>
+    <% @beer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
 <% end %>
-<% if @score_error == true %>
-  <p>Score must be a number!</p>
-<% end %>
+
+<br>
 
 <h2>New Beer</h2>
 <form action="/beers" method="POST">
