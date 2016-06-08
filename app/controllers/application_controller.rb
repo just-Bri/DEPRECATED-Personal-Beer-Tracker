@@ -21,10 +21,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/*' do
-    binding.pry
-    @routes_all = []
-    self::Application.each_route.path_info {|r| @routes_all < r}
-    if @routes_all.include?(request.path_info)
+    @request_url = request.path_info
+    @beer_routes = ["/beers", "/beers/new", "/beers/#{request.path_info.split('/').last}", "/beers/#{request.path_info.split('/')[2]}/edit"]
+    @user_routes = ["/signup", "/login", "/logout"]
+    @brewery_routes = ["/breweries/#{request.path_info.split('/').last}"]
+    @all_routes = @beer_routes + @user_routes + @brewery_routes
+    if @all_routes.include?(@request_url)
       pass
     else
       erb :not_sure
