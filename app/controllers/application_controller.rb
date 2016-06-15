@@ -18,7 +18,9 @@ class ApplicationController < Sinatra::Base
     erb :not_yours
   end
 
-  get '/*' do
+  get '/*' do #Catch All - tried using a couple different gems
+              #that generate a list of all routes but couldn't get them working.
+              #Still trying to find a more elegnat/RESTful way for handling this.
     @request_url = request.path_info
     @beer_routes = ["/beers", "/beers/new", "/beers/#{request.path_info.split('/').last}", "/beers/#{request.path_info.split('/')[2]}/edit"]
     @user_routes = ["/signup", "/login", "/logout"]
