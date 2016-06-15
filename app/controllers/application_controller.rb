@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     erb :index #Home page
+    # binding.pry
   end
 
   get '/not_yours' do
@@ -45,7 +46,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:user_id])
+      @current ||= User.find(session[:user_id])
     end
   end
 end

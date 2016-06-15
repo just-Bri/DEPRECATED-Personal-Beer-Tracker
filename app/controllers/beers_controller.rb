@@ -8,6 +8,7 @@ class BeersController < ApplicationController
   end
 
   get '/beers/new' do #New beer form
+    # binding.pry
     redirect_if_not_logged_in
     erb :'beers/create_beer'
   end
@@ -16,7 +17,7 @@ class BeersController < ApplicationController
     redirect_if_not_logged_in
     @user = User.find_by_id(session[:user_id])
     @brewery = Brewery.find_or_create_by(:name => params[:brewery])
-    @beer = Beer.find_or_create_by(:user => @user, :name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
+    @beer = @user.beers.create(:name => params[:name], :style => params[:style], :brewery => @brewery, :score => params[:score])
     if @beer.valid?
       redirect to "/beers"
     else
