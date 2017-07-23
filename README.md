@@ -7,7 +7,7 @@ You can create/update/delete beers, and look at all beers from a specific brewer
 ## Installation
 Simply clone this repo and bundle install to get all the dependencies installed.
 
-    $ git clone https://github.com/reifnotreef/PersonalBeerTracker.git && bundle install
+    $ git clone https://github.com/reifnotreef/PersonalBeerTracker.git && cd PersonalBeerTracker && bundle install
 
 ## Usage
 
