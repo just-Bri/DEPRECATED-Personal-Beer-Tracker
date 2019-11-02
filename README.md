@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # PersonalBeerTracker
 
 Simple web-app for keeping track of beers you've had.
