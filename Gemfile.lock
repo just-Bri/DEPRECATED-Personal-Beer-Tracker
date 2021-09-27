@@ -46,7 +46,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.6.1)
     minitest (5.9.0)
-    nokogiri (1.12.3)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pry (0.10.3)
