@@ -5,8 +5,6 @@
 Simple web-app for keeping track of beers you've had.
 You can create/update/delete beers, and look at all beers from a specific brewery.
 
-### [Video overview](https://youtu.be/yon1X_xg5ig)
-
 ## Installation
 Simply clone this repo and bundle install to get all the dependencies installed.
 
